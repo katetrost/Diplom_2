@@ -53,26 +53,24 @@ public class UserClient extends RestAssuredClient {
                 .statusCode(202);
     }
 
-    @Step
-    public ValidatableResponse editData(UserDataJson userData, String bearerToken) {
+    @Step ("Информация о пользователе")
+    public ValidatableResponse userInfo(String token) {
         return given()
-                .headers("Authorization", bearerToken)
                 .spec(getBaseSpec())
-                .body(userData)
+                .auth().oauth2(token.replace("Bearer ", ""))
                 .when()
-                .patch(USER_PATH + "/user")
-                .then()
-                .log().body();
+                .get(USER_PATH + "/user")
+                .then();
     }
 
-    @Step
-    public ValidatableResponse editData(UserDataJson userData) {
+    @Step ("Изменение информации о пользователе")
+    public ValidatableResponse userInfoChange(String token, UserCredentials userCredentials) {
         return given()
                 .spec(getBaseSpec())
-                .body(userData)
+                .auth().oauth2(token.replace("Bearer ", ""))
+                .body(userCredentials)
                 .when()
                 .patch(USER_PATH + "/user")
-                .then()
-                .log().body();
+                .then();
     }
 }
