@@ -6,7 +6,6 @@ import io.restassured.response.ValidatableResponse;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class ChangeDataTest {
@@ -55,6 +54,7 @@ public class ChangeDataTest {
     }
 
     @Test
+    @DisplayName("Редактирование данных на емайл, которяй уже есть в базе, у авторизованного пользователя")
     @Description("Изменение данных пользователя. Одинаковый емаил")
     public void userInfoCanNotBeChangeWithSameEmailTest (){
         userClient.create(user); // Создание пользователя

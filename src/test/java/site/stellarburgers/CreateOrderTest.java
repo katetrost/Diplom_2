@@ -1,6 +1,7 @@
 package site.stellarburgers;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +26,8 @@ public class CreateOrderTest {
     }
 
     @Test
-    @Description("Создание заказа. Зарегистрированный пользователь")
+    @DisplayName("Создание заказа. Зарегистрированный пользователь")
+    @Description("Тест /api/orders")
     public void orderCanBeCreatedRegisteredUser (){
         // Создание пользователя
         ValidatableResponse userResponse = userClient.create(user);
@@ -42,7 +44,8 @@ public class CreateOrderTest {
     }
 
     @Test
-    @Description ("Создание заказа. Не зарегистрированный пользователь")
+    @DisplayName("Создание заказа. Не зарегистрированный пользователь")
+    @Description("Тест /api/orders")
     public void orderCanBeCreatedNonRegisteredUser (){
         bearerToken = "";
 
@@ -57,7 +60,8 @@ public class CreateOrderTest {
     }
 
     @Test
-    @Description ("Создание заказа без ингредиентов")
+    @DisplayName ("Создание заказа без ингредиентов")
+    @Description("Тест /api/orders")
     public void orderCanNotBeCreatedWithOutIngredients (){
         // Создание пользователя
         ValidatableResponse userResponse = userClient.create(user);
@@ -73,7 +77,8 @@ public class CreateOrderTest {
     }
 
     @Test
-    @Description ("Создание заказа с невалидными ингридиентами")
+    @DisplayName ("Создание заказа с невалидными ингридиентами")
+    @Description("Тест /api/orders")
     public void orderCanNotBeCreatedWithIncorrectIngredients (){
         // Создание пользователя
         ValidatableResponse userResponse = userClient.create(user);
